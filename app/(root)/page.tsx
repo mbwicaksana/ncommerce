@@ -8,6 +8,9 @@ const SetupPage = () => {
   const isOpen = useStoreModal((state) => state.isOpen);
 
   useEffect(() => {
+    // Pengaturan ModalProvider di layout.tsx diatur disini
+    // Jika Modal tertutup, maka buka modalnya
+    // Kondisi ini menyebabkan modal tidak bisa tertutup karena user wajib membuat store baru
     if (!isOpen) {
       onOpen();
     }

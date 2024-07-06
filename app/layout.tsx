@@ -30,6 +30,10 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body>
+          {/*
+           * Panggil ModalProvider
+           * Pengaturan buka / tutup ModalProvider diatur di @/app/(root)/page.tsx
+           */}
           <ModalProvider />
           {children}
         </body>

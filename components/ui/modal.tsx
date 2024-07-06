@@ -30,6 +30,11 @@ const Modal = ({
   };
 
   return (
+    /**
+     * props open diatur dengan nilai isOpen, yang menentukan apakah dialog terbuka / tertutup
+     * props onOpenChange diatur dengan function onChange() yang menerima argumen 'open' untuk menunjukkan status baru dari dialog
+     * true jika dibuka, false jika ditutup
+     */
     <Dialog open={isOpen} onOpenChange={onChange}>
       <DialogContent>
         <DialogHeader>
