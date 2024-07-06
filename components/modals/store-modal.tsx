@@ -15,18 +15,22 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useState } from "react";
 
 const formSchema = z.object({
   name: z.string().min(1),
 });
 
-const onSubmit = async (values: z.infer<typeof formSchema>) => {
-  // TODO : Buat Toko
-  console.log(values);
-};
-
 export const StoreModal = () => {
+  const [loading, setLoading] = useState(false);
   const storeModal = useStoreModal();
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+    } catch (error) {}
+    console.log(values);
+  };
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

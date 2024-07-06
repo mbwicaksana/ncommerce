@@ -10,6 +10,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { ModalProvider } from "@/provider/modal-provider";
+import { prisma } from "@/lib/prisma";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -26,7 +27,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
+  const store = prisma.return(
     <ClerkProvider>
       <html lang="en">
         <body>
@@ -38,6 +39,6 @@ export default function RootLayout({
           {children}
         </body>
       </html>
-    </ClerkProvider>
+    </ClerkProvider>,
   );
 }
