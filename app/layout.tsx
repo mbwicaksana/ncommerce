@@ -9,8 +9,9 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
-import { ModalProvider } from "@/provider/modal-provider";
+import { ModalProvider } from "@/providers/modal-provider";
 import { prisma } from "@/lib/prisma";
+import { ToasterProvider } from "@/providers/toast-provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -27,10 +28,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const store = prisma.return(
+  return (
     <ClerkProvider>
       <html lang="en">
         <body>
+          <ToasterProvider />
           {/*
            * Panggil ModalProvider
            * Pengaturan buka / tutup ModalProvider diatur di @/app/(root)/page.tsx
@@ -39,6 +41,6 @@ export default function RootLayout({
           {children}
         </body>
       </html>
-    </ClerkProvider>,
+    </ClerkProvider>
   );
 }
