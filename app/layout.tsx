@@ -32,6 +32,11 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body>
+          {/**
+           * Panggil ToasterProvider untuk menambilkan notification
+           *
+           *
+           * */}
           <ToasterProvider />
           {/*
            * Panggil ModalProvider

@@ -1,5 +1,8 @@
-"use client";
+"use client"; // Menandakan bahwa ini adalah komponen client-side
 
+/**
+ * Import hooks dan komponen yang diperlukan
+ */
 import { useStoreModal } from "@/hooks/use-store-modal";
 import Modal from "../ui/modal";
 import * as z from "zod";
@@ -19,39 +22,56 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+/**
+ * Skema form menggunakan zod untuk validasi
+ */
 const formSchema = z.object({
   name: z.string().min(1),
 });
 
+/**
+ * Komponen StoreModal
+ * @returns {JSX.Element} - Komponen Modal untuk membuat store
+ */
 export const StoreModal = () => {
+  // State untuk mengelola loading
   const [loading, setLoading] = useState(false);
+  // Menggunakan hook useStoreModal untuk mengelola modal
   const storeModal = useStoreModal();
 
+  /**
+   * Fungsi yang akan dipanggil saat form disubmit
+   * @param {Object} values - Nilai form
+   * @returns {Promise<void>}
+   */
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      setLoading(true);
-      const response = await axios.post("/api/stores", values);
-      console.log(response.data);
-      toast.success("Berhasil membuat toko");
+      setLoading(true); // Set loading ke true saat permintaan sedang diproses
+      const response = await axios.post("/api/stores", values); // Mengirim permintaan POST ke API untuk membuat store
+      console.log(response.data); // Mencetak respons data ke konsol
+      toast.success("Berhasil membuat toko"); // Menampilkan toast sukses
     } catch (error) {
-      toast.error("Gagal membuat toko");
+      toast.error("Gagal membuat toko"); // Menampilkan toast error
     } finally {
-      setLoading(false);
+      setLoading(false); // Set loading ke false setelah permintaan selesai
     }
-    console.log(values);
+    console.log(values); // Mencetak nilai form ke konsol
   };
 
+  /**
+   * Menggunakan useForm dari react-hook-form dengan zod resolver untuk validasi
+   */
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      name: "", // Nilai default untuk nama store
     },
   });
 
   return (
     /**
-     * Passing props title, description, isOpen, dan onClose ke component Modal
-     * kirim isOpen dan onClose ke component Modal menggunakan value dari hook useStoreModal
+     * Menampilkan modal dengan title, description, isOpen, dan onClose
+     * Mengirim isOpen dan onClose ke komponen Modal menggunakan value dari hook useStoreModal
      */
     <Modal
       title="Buat Store"
