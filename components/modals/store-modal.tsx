@@ -50,6 +50,7 @@ export const StoreModal = () => {
       const response = await axios.post("/api/stores", values); // Mengirim permintaan POST ke API untuk membuat store
       console.log(response.data); // Mencetak respons data ke konsol
       toast.success("Berhasil membuat toko"); // Menampilkan toast sukses
+      window.location.assign(`/${response.data.id}`);
     } catch (error) {
       toast.error("Gagal membuat toko"); // Menampilkan toast error
     } finally {
