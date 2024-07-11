@@ -14,22 +14,16 @@ import { prisma } from "@/lib/prisma";
  */
 export async function POST(req: Request) {
   try {
-    // Mendapatkan userId dari otentikasi pengguna
-    const { userId } = auth();
-    // Mengambil dan mengurai body JSON dari permintaan
-    const body = await req.json();
-    // Mendestrukturisasi body untuk mendapatkan nama toko
-    const { name } = body;
+    const { userId } = auth(); // Mendapatkan userId dari otentikasi pengguna
+    const body = await req.json(); // Mengambil dan mengurai body JSON dari permintaan
+    const { name } = body; // Mendestrukturisasi body untuk mendapatkan nama toko
 
-    // Jika userId tidak ditemukan, kirim respon "Unauthorized" dengan status 401
     if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("Unauthorized", { status: 401 }); // Jika userId tidak ditemukan, kirim respon "Unauthorized" dengan status 401
     }
 
-    // Jika nama toko tidak ditemukan di body, kirim respon "Store Name Required" dengan status 400
-
     if (!name) {
-      return new NextResponse("Store Name Required", { status: 400 });
+      return new NextResponse("Store Name Required", { status: 400 }); // Jika nama toko tidak ditemukan di body, kirim respon "Store Name Required" dengan status 400
     }
 
     /**
@@ -46,11 +40,9 @@ export async function POST(req: Request) {
       },
     });
 
-    // Mengirim respon JSON berisi data toko yang baru dibuat
-    return NextResponse.json(store);
+    return NextResponse.json(store); // Mengirim respon JSON berisi data toko yang baru dibuat
   } catch (error) {
-    // Jika terjadi error, cetak log error dan kirim respon "Internal Error" dengan status 500
-    console.log("[STORES_POST]", error);
-    return new NextResponse("Internal Error", { status: 500 });
+    console.log("[STORES_POST]", error); // Jika terjadi error, cetak log error
+    return new NextResponse("Internal Error", { status: 500 }); // Kirim respon "Internal Error" dengan status 500
   }
 }

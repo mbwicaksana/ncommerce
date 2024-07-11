@@ -4,20 +4,16 @@ import { useStoreModal } from "@/hooks/use-store-modal";
 import { useEffect } from "react";
 
 const SetupPage = () => {
-  // Ambil State dari Hook useStoreModal()
-  const onOpen = useStoreModal((state) => state.onOpen);
-  const isOpen = useStoreModal((state) => state.isOpen);
+  const onOpen = useStoreModal((state) => state.onOpen); // Ambil fungsi onOpen dari Hook useStoreModal()
+  const isOpen = useStoreModal((state) => state.isOpen); // Ambil state isOpen dari Hook useStoreModal()
 
   useEffect(() => {
-    // Pengaturan ModalProvider di layout.tsx diatur disini
-    // Jika Modal tertutup, maka buka modalnya
-    // Kondisi ini menyebabkan modal tidak bisa tertutup karena user wajib membuat store baru
     if (!isOpen) {
-      onOpen();
+      onOpen(); // Jika modal tertutup, buka modal
     }
-  }, [isOpen, onOpen]);
+  }, [isOpen, onOpen]); // Menggunakan useEffect untuk memantau perubahan pada isOpen dan onOpen
 
-  return <div className="p-4">Root Page</div>;
+  return null;
 };
 
 export default SetupPage;

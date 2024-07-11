@@ -10,13 +10,14 @@ export default async function DashboardLayout({
   children: React.ReactNode;
   params: { storeId: string };
 }) {
-  const { userId } = auth();
+  const { userId } = auth(); // Mendapatkan userId dari auth
 
   if (!userId) {
-    redirect("sign-in");
+    redirect("sign-in"); // Jika tidak ada userId, redirect ke halaman sign-in
   }
 
   const store = await prisma.store.findFirst({
+    // Mencari store yang sesuai dengan storeId dan userId
     where: {
       id: params.storeId,
       userId,
@@ -24,13 +25,13 @@ export default async function DashboardLayout({
   });
 
   if (!store) {
-    redirect("/");
+    redirect("/"); // Jika store tidak ditemukan, redirect ke halaman utama
   }
 
   return (
     <>
-      <Navbar />
-      {children}
+      <Navbar /> {/* Mengembalikan layout dengan Navbar */}
+      {children} {/* dan children */}
     </>
   );
 }

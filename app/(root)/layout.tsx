@@ -7,20 +7,20 @@ export default async function SetupLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { userId } = auth();
+  const { userId } = auth(); // Mendapatkan userId dari auth
   if (!userId) {
-    redirect("sign-in");
+    redirect("sign-in"); // Jika tidak ada userId, redirect ke halaman sign-in
   }
 
   const store = await prisma.store.findFirst({
     where: {
       userId,
     },
-  });
+  }); // Mencari store yang sesuai dengan userId
 
   if (store) {
-    redirect(`/${store.id}`);
+    redirect(`/${store.id}`); // Jika store ditemukan, redirect ke halaman store
   }
 
-  return <>{children}</>;
+  return <>{children}</>; // Mengembalikan children jika tidak ada store
 }

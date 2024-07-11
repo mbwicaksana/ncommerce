@@ -7,10 +7,11 @@ export default function MainNav({
   className,
   ...props
 }: React.HTMLAttributes<HTMLElement>) {
-  const pathname = usePathname();
-  const params = useParams();
+  const pathname = usePathname(); // Mendapatkan path saat ini
+  const params = useParams(); // Mendapatkan parameter dari URL
 
   const routes = [
+    // Membuat array routes dengan properti href, label, dan active
     {
       href: `/${params.storeId}/settings`,
       label: "Settings",
@@ -20,18 +21,19 @@ export default function MainNav({
 
   return (
     <nav className={cn("flex items-center space-x-4 lg:space-x-6", className)}>
+      {/* Kelas untuk styling navbar */}
       {routes.map((route) => (
         <Link
           key={route.href}
           href={route.href}
           className={cn(
-            "text-sm font-medium transition-colors hover:text-primary",
+            "text-sm font-medium transition-colors hover:text-primary", // Kelas umum untuk link
             route.active
-              ? "text-black dark:text-white"
-              : "text-muted-foreground",
+              ? "text-black dark:text-white" // Kelas untuk link yang aktif
+              : "text-muted-foreground", // Kelas untuk link yang tidak aktif
           )}
         >
-          {route.label}
+          {route.label} {/* Menampilkan label dari route */}
         </Link>
       ))}
     </nav>
