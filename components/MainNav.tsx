@@ -13,6 +13,11 @@ export default function MainNav({
   const routes = [
     // Membuat array routes dengan properti href, label, dan active
     {
+      href: `/${params.storeId}`,
+      label: "Dashboard",
+      active: pathname === `/${params.storeId}`,
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: "Settings",
       active: pathname === `/${params.storeId}/settings`,
